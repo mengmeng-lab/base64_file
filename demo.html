@@ -1,0 +1,31 @@
+<div style="width:400px;height:400px;background: #ccc;margin: 0 auto;margin-top:50px;">    
+    <div class="imgBox" style="width:300px;height:150px;background:#bbb;margin-bottom:30px">
+         <img id="demoImg" src=""/>
+    </div>
+    <div class="canvasBox" style="width:300px;height:150px;background:#bbb">
+         <canvas id="demoCanvas"></canvas>
+    </div>
+</div>
+<script>
+  var fileUrl = 'http://pic27.nipic.com/20130222/10741105_154139938000_2.jpg'  
+  function fileProcess(fileUrl){
+    var demoImg = document.getElementById("demoImg");
+    demoImg.src = fileUrl
+        var img = fileUrl;
+    var image = new Image();
+    // 给img加上随机值一部分情况下能解决跨域
+    // image.src = img + '?time=' + new Date().valueOf();
+    image.src = img;
+    // 允许跨域操作
+    image.setAttribute("crossOrigin",'anonymous');
+    image.onload = function(){
+      var base64 = getBase64Image(image);
+      console.log(base64)
+      var newFile = dataURLtoFile(base64,'img111');
+      console.log(newFile)
+      demoImg.src=base64.dataURL;
+      var blob = convertBase64UrlToBlob(base64);
+      console.log(blob);
+    }
+  }
+</script>
